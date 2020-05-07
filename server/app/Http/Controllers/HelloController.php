@@ -26,18 +26,22 @@ function tag($tag, $text) {
 class HelloController extends Controller
 {
 
-    // section3
     public function index(Request $request) {
-        $data = [
-            ['name'=>'山田たろう', 'mail'=>'taro@yamada'],
-            ['name'=>'田中はなこ', 'mail'=>'hanako@flower'],
-            ['name'=>'鈴木さちこ', 'mail'=>'sachico@happy'],
-        ];
-        return view('hello.index', [
-            'data'=>$data,
-            'message'=>'Hello',
-        ]);
+        return view('hello.index', ['data'=>$request->data]);
     }
+
+    // section3
+    // public function index(Request $request) {
+    //     $data = [
+    //         ['name'=>'山田たろう', 'mail'=>'taro@yamada'],
+    //         ['name'=>'田中はなこ', 'mail'=>'hanako@flower'],
+    //         ['name'=>'鈴木さちこ', 'mail'=>'sachico@happy'],
+    //     ];
+    //     return view('hello.index', [
+    //         'data'=>$data,
+    //         'message'=>'Hello',
+    //     ]);
+    // }
 
     public function post(Request $request) {
         return view('hello.index', ['msg' => $request->msg]);

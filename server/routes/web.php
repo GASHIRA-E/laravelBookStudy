@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Middleware\HelloMiddleware;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('hello/{id?}', 'HelloController@index');
+Route::get('hello', 'HelloController@index')
+    ->middleware(HelloMiddleware::class);
 Route::post('hello/', 'HelloController@post');
 // Route::get('hello/other', 'HelloController@other');
