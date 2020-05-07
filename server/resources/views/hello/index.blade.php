@@ -11,6 +11,9 @@
   <p>ここが本文のコンテンツです</p>
   <p>必要なだけ記述できます</p>
 
+  <p>これは、<middleware>google.com</middleware>へのリンクです。</p>
+  <p>これは、<middleware>yahoo.co.jp</middleware>へのリンクです。</p>
+
   {{-- <p>Controller value<br />'message' = {{$message}}</p>
   <p>ViewComposer value<br />'view_message' = {{$view_message}}</p> --}}
 
@@ -19,9 +22,9 @@
     'msg_content'=>'サブビューです。'
   ])
 
-  <ul>
+  {{-- <ul>
     @each('components.item', $data, 'item')
-  </ul>
+  </ul> --}}
 @endsection
 
 @section('footer')
