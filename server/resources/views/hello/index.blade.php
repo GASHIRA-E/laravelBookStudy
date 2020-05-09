@@ -16,34 +16,34 @@
     <table>
       @csrf
 
-      @if ($errors->has('name'))
-          <tr>
-            <th>ERROR: </th>
-            <td>{{ $errors->first('name') }}</td>
-          </tr>
-      @endif
+      @error('name')
+        <tr>
+          <th>ERROR: </th>
+          <td>{{ $message }}</td>
+        </tr>
+      @enderror
       <tr>
         <th>name: </th>
         <td><input type="text" name="name"></td>
       </tr>
 
-      @if ($errors->has('mail'))
+      @error('mail')
         <tr>
           <th>ERROR: </th>
-          <td>{{ $errors->first('mail') }}</td>
+          <td>{{ $message }}</td>
         </tr>
-      @endif
+      @enderror
       <tr>
         <th>mail: </th>
         <td><input type="text" name="mail"></td>
       </tr>
 
-      @if ($errors->has('age'))
+      @error('age')
         <tr>
           <th>ERROR: </th>
-          <td>{{ $errors->first('age') }}</td>
+          <td>{{ $message }}</td>
         </tr>
-      @endif
+      @enderror
       <tr>
         <th>age: </th>
         <td><input type="text" name="age"></td>
