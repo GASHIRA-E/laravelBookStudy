@@ -27,7 +27,7 @@ class HelloController extends Controller
 {
 
     public function index(Request $request) {
-        return view('hello.index');
+        return view('hello.index', ['msg'=>'フォームを入力：']);
     }
 
     // section3
@@ -44,7 +44,13 @@ class HelloController extends Controller
     // }
 
     public function post(Request $request) {
-        return view('hello.index', ['msg' => $request->msg]);
+        $varidate_rule = [
+            'name' => 'required',
+            'mail' => 'email',
+            'age' => 'numeric|between:0,150',
+        ];
+        $this->validate($request, $varidate_rule);
+        return view('hello.index', ['msg' => '正しく入力されました！']);
     }
 
     // section2
