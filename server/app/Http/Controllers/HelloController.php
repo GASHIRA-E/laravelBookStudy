@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
+use App\Http\Requests\HelloRequest;
+
 global $head, $style, $body, $end;
 
 $head = '<html><head>';
@@ -43,33 +45,10 @@ class HelloController extends Controller
     //     ]);
     // }
 
-    public function post(Request $request) {
-        $varidate_rule = [
-            'name' => 'required',
-            'mail' => 'email',
-            'age' => 'numeric|between:0,150',
-        ];
-        $this->validate($request, $varidate_rule);
+    // HelloRequestを使用する
+    public function post(HelloRequest $request) {
         return view('hello.index', ['msg' => '正しく入力されました！']);
     }
-
-    // section2
-    // public function index(Request $request, Response $response, $id = 'Ega') {
-    //     global $head, $style, $body, $end;
-
-    //     $html = $head . tag('title', 'Hello Index') . $style . $body
-    //         . tag('h1', 'Hello YouTube')
-    //         . '<a href="/hello/other">go to other page</a>'
-    //         . '<h3>Request</h3>'
-    //         . "<pre>{$request}</pre>"
-    //         . '<h3>Response</h3>'
-    //         . "<pre>{$response}</pre>"
-    //         . $end;
-
-    //     // return $html;
-    //     $response->setContent($html);
-    //     return $response;
-    // }
 
     public function other() {
         global $head, $style, $body, $end;
