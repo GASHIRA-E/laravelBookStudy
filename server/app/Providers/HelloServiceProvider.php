@@ -5,6 +5,9 @@ namespace App\Providers;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
+use Validator;
+use App\Http\Validators\HelloValidator;
+
 class HelloServiceProvider extends ServiceProvider
 {
     /**
@@ -24,18 +27,9 @@ class HelloServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // コンポーザとして外部で変数を設定可能
-        // View::composer(
-        //     'hello.index', function($view) {
-        //         $view->with('view_message', 'composer message!');
-        //     }
-        // );
-
-        // コンポーザを外部で設定することも可能
-        View::composer(
-            // 下記のようにワイルドカード指定もできると思われる。（これで動いたから）
-            // '*', 'App\Http\Composers\HelloComposer'
-            'hello.index', 'App\Http\Composers\HelloComposer'
-        );
+        $validator = $this->app['validator'];
+        $validator->resolver(function($translator, $data, $rules, $messages) {
+            return new HelloValidator($translator, $data, $rules, $messages);
+        });
     }
 }
