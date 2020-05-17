@@ -14,7 +14,6 @@
   @endif
   <form action="/hello" method="POST">
     <table>
-      @csrf
 
       @error('name')
         <tr>
