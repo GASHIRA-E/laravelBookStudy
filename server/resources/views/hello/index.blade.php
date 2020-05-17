@@ -14,40 +14,17 @@
   @endif
   <form action="/hello" method="POST">
     <table>
-
-      @error('name')
+      @csrf
+      @if ($errors->has('msg'))
         <tr>
-          <th>ERROR: </th>
-          <td>{{ $message }}</td>
+          <th>Error</th>
+          <td>{{$errors->first('msg')}}</td>
         </tr>
-      @enderror
+      @endif
       <tr>
-        <th>name: </th>
-        <td><input type="text" name="name" value="{{old('name')}}"></td>
+        <th>Message: </th>
+        <td><input type="text" name="msg" value="{{old('msg')}}"></td>
       </tr>
-
-      @error('mail')
-        <tr>
-          <th>ERROR: </th>
-          <td>{{ $message }}</td>
-        </tr>
-      @enderror
-      <tr>
-        <th>mail: </th>
-        <td><input type="text" name="mail" value="{{old('mail')}}"></td>
-      </tr>
-
-      @error('age')
-        <tr>
-          <th>ERROR: </th>
-          <td>{{ $message }}</td>
-        </tr>
-      @enderror
-      <tr>
-        <th>age: </th>
-        <td><input type="text" name="age" value="{{old('age')}}"></td>
-      </tr>
-
       <tr>
         <th></th>
         <td><input type="submit" value="send"></td>

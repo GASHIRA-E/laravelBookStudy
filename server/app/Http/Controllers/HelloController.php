@@ -29,21 +29,26 @@ class HelloController extends Controller
 {
 
     public function index(Request $request) {
-        return view('hello.index', ['msg'=>'フォームを入力：']);
+        if ($request->hasCookie('msg')) {
+            //  requestからクッキーを取り出す
+            $msg = 'Cookie: ' . $request->cookie('msg');
+        } else {
+            $msg = '※クッキーはありません。';
+        }
+        return view('hello.index', ['msg'=>$msg]);
     }
 
-    // HelloRequestを使用する
-    public function post(HelloRequest $request) {
-        return view('hello.index', ['msg' => '正しく入力されました！']);
-    }
+    public function post(Request $request) {
+        $validateRule = [
+            'msg' => 'required'
+        ];
+        
+        $this->validate($request, $validateRule);
+        $msg = $request->msg;
+        $response = response()->view('hello.index', ['msg' => '「'.$msg.'」をクッキーに保存しました。']);
+        // responseにクッキーを保存する
+        $response->cookie('msg', $msg, 100);
 
-    public function other() {
-        global $head, $style, $body, $end;
-
-        $html = $head . tag('title', 'Hello Other') . $style . $body
-            . tag('h1', 'Other')
-            . $end;
-
-        return $html;
+        return $response;
     }
 }

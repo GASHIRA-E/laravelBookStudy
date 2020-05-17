@@ -13,6 +13,5 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         // ワイルドカードも使用可能
-        'hello'
     ];
 }
