@@ -5,8 +5,12 @@ services:
     build: ./docker/php
     volumes:
     - ./server:/var/www
-    networks:
-      - app-net
+    environment:
+      - DB_CONNECTION=pgsql
+      - DB_HOST=db
+      - DB_DATABASE=root
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
   nginx:
     image: nginx
     container_name: nginx
@@ -31,8 +35,3 @@ services:
     hostname: postgres
     restart: always
     user: root
-    networks:
-      - app-net
-networks:
-  app-net:
-    driver: bridge
